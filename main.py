@@ -1,6 +1,6 @@
 noise = 0
 min_n = 30
-max_n = 100
+max_n = 70
 
 
 def on_forever():
@@ -34,3 +34,19 @@ def Higlight_X_dots(Number_of_Dots):
             Line_num = 0
             Row_num = Row_num + 1
     
+
+
+def on_button_pressed_a():
+    global min_n
+    min_n -= 1
+input.on_button_pressed(Button.A, on_button_pressed_a)
+
+def on_button_pressed_b():
+    global max_n
+    max_n += 1
+input.on_button_pressed(Button.A, on_button_pressed_a)
+
+def on_button_pressed_ab():
+    global max_n, min_n
+    basic.show_string("Min" + str(min_n))
+input.on_button_pressed(Button.AB, on_button_pressed_ab)

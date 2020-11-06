@@ -1,6 +1,6 @@
 let noise = 0
 let min_n = 30
-let max_n = 100
+let max_n = 70
 basic.forever(function on_forever() {
     
     noise = smarthome.ReadNoise(AnalogPin.P2)
@@ -31,3 +31,19 @@ function Higlight_X_dots(Number_of_Dots: number) {
     }
 }
 
+function on_button_pressed_a() {
+    
+    min_n -= 1
+}
+
+input.onButtonPressed(Button.A, on_button_pressed_a)
+function on_button_pressed_b() {
+    
+    max_n += 1
+}
+
+input.onButtonPressed(Button.A, on_button_pressed_a)
+input.onButtonPressed(Button.AB, function on_button_pressed_ab() {
+    
+    basic.showString("Min" + ("" + min_n))
+})
