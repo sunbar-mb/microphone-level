@@ -1,14 +1,24 @@
+# Simle application to test Microphone sensor from Smart home kit 
+# Application measures noise level , it is in range 36-75
+# and result is dispayed on LED matrix (0=40LEDs, 65=25LEDs)
+# !!! If there's no sensor connected to the PIN, system returns value 55 !!!
+
 noise = 0
-min_n = 30
-max_n = 70
+min_n = 40
+max_n = 65
+
+# min bylo 36, max bylo 105
+
+serial.redirect_to_usb()
 
 
 def on_forever():
     global noise, min_n, max_n
     noise = smarthome.read_noise(AnalogPin.P2)
-
+    serial.write_value("x", noise) 
     noise = (noise - min_n) * (25/max_n)
     Higlight_X_dots(noise)
+    pause(1000)
 
 basic.forever(on_forever)
 

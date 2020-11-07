@@ -1,11 +1,19 @@
+//  Simle application to test Microphone sensor from Smart home kit 
+//  Application measures noise level , it is in range 36-75
+//  and result is dispayed on LED matrix (0=40LEDs, 65=25LEDs)
+//  !!! If there's no sensor connected to the PIN, system returns value 55 !!!
 let noise = 0
-let min_n = 30
-let max_n = 70
+let min_n = 40
+let max_n = 65
+//  min bylo 36, max bylo 105
+serial.redirectToUSB()
 basic.forever(function on_forever() {
     
     noise = smarthome.ReadNoise(AnalogPin.P2)
+    serial.writeValue("x", noise)
     noise = (noise - min_n) * (25 / max_n)
     Higlight_X_dots(noise)
+    pause(1000)
 })
 function Higlight_X_dots(Number_of_Dots: number) {
     let Line_num = 0
